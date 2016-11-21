@@ -14,7 +14,7 @@ samtools_old="/home/slava/work/tools/samtools-0.1.19/samtools"
 samtools_new="/usr/bin/samtools"
 bwa="/bin/bwa"
 bowtie="/bin/bowtie"
-bcftools=/home/slava/work/tools/samtools-0.1.19/bcftools/bcftools
+bcftools="/home/slava/work/tools/samtools-0.1.19/bcftools/bcftools"
 
 ###############################################################################
 bamsort=1
@@ -130,7 +130,7 @@ samtols_exist=1
 printf "Samtools\t[OK] Новая версия!\n"
 
 else
-printf "Samtools не найдена\t\t[ОШИБКА]"
+printf "Samtools не найдена\t\t[ОШИБКА]\n"
 samtols_exist=0    
 fi
 
@@ -140,7 +140,7 @@ if [ -f $bwa ]; then
 bwa_exist=1    
 printf "Bwa\t\t[OK]\n"
 else
-printf "Bwa не найдена\t\t[ОШИБКА]"
+printf "Bwa не найдена\t\t[ОШИБКА]\n"
 bwa_exist=0
 fi
 
@@ -150,7 +150,7 @@ if [ -f $bowtie ]; then
 bowtie_exist=1    
 printf "Bowtie\t\t[OK]\n"
 else
-printf "Bowtie не найдена\t\t[ОШИБКА]"
+printf "Bowtie не найдена\t\t[ОШИБКА]\n"
 bowtie_exist=0
 fi
 
@@ -160,7 +160,7 @@ if [ -f $bcftools ]; then
 bcftools_exist=1    
 printf "bcftools\t[OK]\n"
 else
-printf "bcftools не найдена\t\t[ОШИБКА]"
+printf "bcftools не найдена\t\t[ОШИБКА]\n"
 bcftools_exist=0    
 fi
 
@@ -519,7 +519,7 @@ sorted_bam_exists=`ls -1 *$bam_sort_ext.bam 2>/dev/null | wc -l`
 			if [ $use_samtools_version == "old" ];then
 			$samtools_old mpileup -uf $reference $bam_file$bam_sort_ext.bam | $bcftools view -vcg - > $bam_file$snp_caller_ext		
 			elif [ $use_samtools_version == "new" ];then				
-			$samtools_new mpileup -ugf $reference $bam_file$bam_sort_ext.bam | bcftools call -vmO z -o $bam_file$snp_caller_ext
+			$samtools_new mpileup -ugf $reference $bam_file$bam_sort_ext.bam | bcftools call -vmo $bam_file$snp_caller_ext
 			#tabix -p vcf $bam_file.vcf.gz
 			fi
 				#printf "${c_h_green}${bam_file^}\t<--${c_std}\n"
